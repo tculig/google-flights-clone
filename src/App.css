@@ -1,0 +1,62 @@
+/* src/App.css */
+.flight-results {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.flight-card {
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+/* src/App.css */
+.search-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+
+
+/* src/App.css */
+.App {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.error {
+  color: red;
+}
+
+/* src/App.css */
+@media (max-width: 600px) {
+  .search-form {
+    flex-direction: column;
+  }
+}
+
+/* src/App.css */
+.search-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-form .MuiTextField-root,
+.search-form .MuiAutocomplete-root {
+  min-width: 200px;
+  flex: 1 1 200px;
+}
+
+.search-form button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
