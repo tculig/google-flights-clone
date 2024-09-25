@@ -47,12 +47,12 @@ function App() {
 
   return (
     <div className="App">
-      <HeroImage style={{width:"1248px"}}/>
+      <HeroImage style={{maxWidth:"1248px"}}/>
       <Styled.Title>Flights</Styled.Title>
       <Styled.Content>
-        <Styled.SearchContainer>
+      
         <SearchForm onSearch={handleSearch} />
-        </Styled.SearchContainer>
+       
      
       {loading && <div>Loading flights...</div>}
       {error && <div className="error">{error}</div>}

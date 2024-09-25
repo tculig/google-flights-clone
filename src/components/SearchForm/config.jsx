@@ -19,7 +19,7 @@ const optionsButton1 = [
           </Styled.SelectedContainer>
       ),
       option: (isSelected, index, additionalProps) => (
-        <MenuItem value="roundTrip" key={index} {...additionalProps}>
+        <MenuItem value="roundTrip" key={index} {...additionalProps} disabled>
           <Styled.DropdownIconContainer>
             {isSelected ? <CheckmarkIcon /> : ""}
           </Styled.DropdownIconContainer>
