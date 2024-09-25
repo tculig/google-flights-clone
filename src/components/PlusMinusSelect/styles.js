@@ -6,23 +6,35 @@ const OptionText = styled.span`
 `
 
 const CounterRowContainer = styled.div`
-    padding: 8px;
     display: flex;
 `
 
 const PersonCountText = styled.div`
+    padding: 8px;
     min-width: 92px;
+    display: flex;
+    align-items: center;
+    color: #71757A;
 `
 
 const IncrementBoxContainer = styled.div`
-    width:48px;
-    height:48px;
+    width: 32px !important;
+    height: 32px !important;
     padding: 8px;
+    display: flex;
+    flex-shrink: 0;
 `
 
 const IncrementBox = styled.div`
     border-radius: 4px;
-    color: ${(props) => props.$disabled?"red":"blue"};
+    background-color: ${(props) => props.$disabled?"#E7E8E8":"#E9F0FF"};
+    fill: ${(props) => props.$disabled?"#BBBDBE":"#759BE5"};
+    height: 100%;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    flex-shrink: 0;
 `
 
 const SelectedContainer = styled.div`
@@ -49,11 +61,20 @@ const DropdownIconContainer = styled.div`
     fill: #5F6368;
 `
 const RootContainer = styled.div`
-    margin-right: 4px;
+    margin-right: 8px;
     min-width: 56px;
     min-height: 48px;
     display:flex;
     align-items:center;
 `
 
-export { IncrementBoxContainer, IncrementBox, OptionText, SelectedContainer, SelectedIconContainer, SelectedText, DropdownIconContainer, PersonCountText, RootContainer, CounterRowContainer };
+const ValueContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    flex-shrink: 0;
+    padding: 8px;
+    color: #71757A;
+`
+
+export { ValueContainer, IncrementBoxContainer, IncrementBox, OptionText, SelectedContainer, SelectedIconContainer, SelectedText, DropdownIconContainer, PersonCountText, RootContainer, CounterRowContainer };
