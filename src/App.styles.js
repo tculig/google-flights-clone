@@ -4,6 +4,7 @@ const Title = styled.div`
     text-align: center;
     font-size: xxx-large;
     font-weight: 400;
+    margin-bottom: 36px;
 `;
 
 const Content = styled.div`

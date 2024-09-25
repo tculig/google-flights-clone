@@ -2,9 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { CircularProgress, debounce } from "@mui/material";
-import axios from "axios";
-
-const API_KEY = process.env.REACT_APP_RAPIDAPI_KEY;
+import { searchAirports } from "api";
 
 const AirportAutocomplete = ({ setFormData, label, dataKey }) => {
   const [inputValue, setInputValue] = useState('');
@@ -20,22 +18,13 @@ const AirportAutocomplete = ({ setFormData, label, dataKey }) => {
         }
         setLoading(true);
         try {
-          const response = await axios.get('https://sky-scrapper.p.rapidapi.com/api/v1/flights/searchAirport', {
-            params: {
-              query: input,
-              locale: "en-US"
-          },
-          headers: {
-              'x-rapidapi-key': API_KEY,
-              'x-rapidapi-host': 'sky-scrapper.p.rapidapi.com',
-          },
-          });
-          const newOptions = response.data?.data?.map(el=>({
-            id:el.entityId,
+          const data = await searchAirports(input);
+          const newOptions = data?.data?.map(el=>({
+            entityId:el.entityId,
             label: el.presentation.suggestionTitle,
+            skyId: el.skyId,
           }))
-          console.log(newOptions)
-          setDropdownOptions(newOptions??[]);
+           setDropdownOptions(newOptions??[]);
         } catch (error) {
           console.error('Error fetching airport suggestions:', error);
         } finally {
@@ -55,7 +44,6 @@ const AirportAutocomplete = ({ setFormData, label, dataKey }) => {
     <Autocomplete
     inputValue={inputValue}
     options={dropdownOptions}
-
     loading={loading}
     onInputChange={(event, value, reason) => {
       if (reason === "input") {
@@ -64,7 +52,6 @@ const AirportAutocomplete = ({ setFormData, label, dataKey }) => {
       }
     }}
     onChange={(event, newValue) => {
-      console.log(newValue)
       setInputValue(newValue?.label??"");
       if(newValue==null) setDropdownOptions([]);
       setFormData((formData)=>({
@@ -84,8 +71,7 @@ const AirportAutocomplete = ({ setFormData, label, dataKey }) => {
             <>
               {loading ? (
                 <CircularProgress color="inherit" size={20} />
-              ) : null}
-              {params.InputProps.endAdornment}
+              ) : params.InputProps.endAdornment}
             </>
           ),
         }}

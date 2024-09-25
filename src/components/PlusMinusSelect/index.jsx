@@ -6,9 +6,17 @@ import { ReactComponent as Person } from "../../assets/person.svg";
 import { ReactComponent as Minus } from "../../assets/minus.svg";
 import { ReactComponent as Plus } from "../../assets/plus.svg";
 import { MenuItem } from "@mui/material";
+import { clamp } from '../../utils';
 
-const PlusMinusSelect = ({ value, setValue }) => {
+const PlusMinusSelect = ({ dataKey, formData, setFormData }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const updateValue = (increment) =>{
+    setFormData((formData)=>({
+      ...formData,
+      [dataKey]: clamp(formData[dataKey]+increment,1,9),
+    }));
+  }
 
   const incrementMenu = (
     <MenuItem
@@ -28,13 +36,13 @@ const PlusMinusSelect = ({ value, setValue }) => {
       <Styled.CounterRowContainer>
         <Styled.PersonCountText>Adults</Styled.PersonCountText>
         <Styled.IncrementBoxContainer >
-          <Styled.IncrementBox $disabled={false} onClick={() => setValue((oldValue)=>Math.max(1,oldValue-1))} >
+          <Styled.IncrementBox $disabled={false} onClick={() => updateValue(-1)} >
             <Minus />
           </Styled.IncrementBox>
         </Styled.IncrementBoxContainer>
-        <Styled.ValueContainer>{value}</Styled.ValueContainer>
+        <Styled.ValueContainer>{formData[dataKey]}</Styled.ValueContainer>
         <Styled.IncrementBoxContainer>
-          <Styled.IncrementBox $disabled={false} onClick={() => setValue((oldValue)=>Math.min(oldValue+1,9))}>
+          <Styled.IncrementBox $disabled={false} onClick={() => updateValue(+1)}>
             <Plus  />
           </Styled.IncrementBox>
         </Styled.IncrementBoxContainer>
@@ -47,7 +55,7 @@ const PlusMinusSelect = ({ value, setValue }) => {
       <Styled.SelectedIconContainer>
         <Person />
       </Styled.SelectedIconContainer>
-      <Styled.SelectedText>{value}</Styled.SelectedText>
+      <Styled.SelectedText>{formData[dataKey]}</Styled.SelectedText>
     </Styled.SelectedContainer>
   );
 

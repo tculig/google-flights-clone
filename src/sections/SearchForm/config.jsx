@@ -51,6 +51,28 @@ const optionsButton1 = [
           </Styled.OptionText>
         </MenuItem>
       ),
+    },{
+      key: "multiCity",
+      selected: (
+        <Styled.SelectedContainer>
+          <Styled.SelectedIconContainer>
+             <ArrowRight />
+          </Styled.SelectedIconContainer>
+          <Styled.SelectedText>
+          Multi-city
+          </Styled.SelectedText>
+          </Styled.SelectedContainer>
+      ),
+      option: (isSelected, index, additionalProps) => (
+        <MenuItem value="oneWay" key={index} {...additionalProps} disabled>
+          <Styled.DropdownIconContainer>
+            {isSelected ? <CheckmarkIcon /> : ""}
+          </Styled.DropdownIconContainer>
+          <Styled.OptionText>
+          Multi-city
+          </Styled.OptionText>
+        </MenuItem>
+      ),
     },
   ];
 
@@ -76,7 +98,7 @@ const optionsButton1 = [
       ),
     },
     {
-      key: "premiumEconomy",
+      key: "premium_economy",
       selected: (
         <Styled.SelectedContainer>
           <Styled.SelectedText>
@@ -85,7 +107,7 @@ const optionsButton1 = [
           </Styled.SelectedContainer>
       ),
       option: (isSelected, index, additionalProps) => (
-        <MenuItem value="premiumEconomy" key={index} {...additionalProps}>
+        <MenuItem value="premium_economy" key={index} {...additionalProps}>
           <Styled.DropdownIconContainer>
             {isSelected ? <CheckmarkIcon /> : ""}
           </Styled.DropdownIconContainer>

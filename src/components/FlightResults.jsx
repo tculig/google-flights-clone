@@ -1,4 +1,3 @@
-// src/components/FlightResults.jsx
 import React from 'react';
 import FlightCard from './FlightCard';
 

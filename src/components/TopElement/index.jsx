@@ -2,17 +2,19 @@ import React from "react";
 import * as Styled from "./styles";
 import Select from "@mui/material/Select";
 
-const TopElement = ({options, value, setValue}) => {
+const TopElement = ({options, dataKey, formData, setFormData}) => {
   
-
   const handleChange = (event) => {
-    setValue(event.target.value);
+    setFormData((formData)=>({
+      ...formData,
+      [dataKey]: event.target.value,
+    }));
   };
 
   return (
     <Styled.TopElement>
       <Select
-        value={value}
+        value={formData[dataKey]}
         renderValue={(value) => options.find((el) => el.key === value).selected}
         onChange={handleChange}
         inputProps={{ "aria-label": "Trip type" }}
@@ -33,7 +35,7 @@ const TopElement = ({options, value, setValue}) => {
         }}
       >
         {options.map((el, index) =>
-          el.option(value === el.key, index, {
+          el.option(formData[dataKey] === el.key, index, {
             sx: { paddingRight: "24px", height: "56px" },
           })
         )}
