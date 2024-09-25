@@ -49,7 +49,11 @@ const SearchForm = ({ onSearch }) => {
             formData={formData}
             dataKey="tripType"
           />
-          <PlusMinusSelect setFormData={setFormData} dataKey="passengers" formData={formData}/>
+          <PlusMinusSelect
+            setFormData={setFormData}
+            dataKey="passengers"
+            formData={formData}
+          />
           <TopElement
             options={optionsButton3}
             setFormData={setFormData}
@@ -97,6 +101,7 @@ const SearchForm = ({ onSearch }) => {
           fontWeight: "600",
           margin: "auto",
           bottom: "24px",
+          zIndex: "333",
           boxShadow:
             "0 1px 3px 0 rgba(60,64,67,.3),0 4px 8px 3px rgba(60,64,67,.15)",
         }}
@@ -106,6 +111,9 @@ const SearchForm = ({ onSearch }) => {
       >
         Search
       </Button>
+      <div style={{position:"relative", marginTop:"-40px", marginBottom:"24px"}}>
+        <div className="overlay-container"></div>
+      </div>
     </>
   );
 };

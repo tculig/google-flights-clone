@@ -30,6 +30,17 @@
   
 }
 
+.overlay-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px; /* This defines the height of the overlay */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(0, 0, 0, 0)); /* Gradient effect */
+  pointer-events: none; 
+}
+
 .error {
   color: red;
 }
