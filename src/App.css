@@ -19,13 +19,10 @@
   gap: 10px;
 }
 
-
-
 /* src/App.css */
 .App {
-  max-width: 800px;
+  max-width: 1248px;
   margin: 0 auto;
-  padding: 20px;
 }
 
 .error {

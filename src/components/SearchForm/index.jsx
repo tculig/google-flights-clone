@@ -1,16 +1,18 @@
-// src/components/SearchForm.jsx
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
-import airports from "./airports.json";
 import Grid from "@mui/material/Grid";
+import AirportAutocomplete from "../AirportAutocomplete";
+import * as Styled from './styles';
+import TopElement from "components/TopElement";
+import { optionsButton1, optionsButton3 } from "./config";
+import PlusMinusSelect from "components/PlusMinusSelect";
 
 const SearchForm = ({ onSearch }) => {
   const [formData, setFormData] = useState({
     origin: null,
     destination: null,
-    departureDate: "",
-    returnDate: "",
+    departureDate: '',
+    returnDate: '',
     passengers: 1,
   });
 
@@ -25,13 +27,13 @@ const SearchForm = ({ onSearch }) => {
     e.preventDefault();
 
     if (!formData.origin || !formData.destination) {
-      alert("Please select both origin and destination airports.");
+      alert('Please select both origin and destination airports.');
       return;
     }
 
     const searchParams = {
-      origin: formData.origin.iata_code,
-      destination: formData.destination.iata_code,
+      origin: formData.origin.codeIataAirport,
+      destination: formData.destination.codeIataAirport,
       departureDate: formData.departureDate,
       returnDate: formData.returnDate,
       passengers: formData.passengers,
@@ -39,50 +41,24 @@ const SearchForm = ({ onSearch }) => {
 
     onSearch(searchParams);
   };
+  const [value1, setValue1] = React.useState(optionsButton1[0].key);
+  const [value2, setValue2] = React.useState(1);
+  const [value3, setValue3] = React.useState(optionsButton3[0].key);
 
   return (
+    <div>
+      <Styled.TopContainer>
+        <TopElement options={optionsButton1} value={value1} setValue={setValue1}/>
+        <PlusMinusSelect value={value2} setValue={setValue2}/>
+        <TopElement options={optionsButton3} value={value3} setValue={setValue3}/>
+      </Styled.TopContainer>
     <form onSubmit={handleSubmit} className="search-form">
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6} md={4}>
-          <Autocomplete
-            options={airports}
-            getOptionLabel={(option) => `${option.city} (${option.iata_code})`}
-            onChange={(event, newValue) => {
-              setFormData({
-                ...formData,
-                origin: newValue,
-              });
-            }}
-            
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Origin"
-                variant="outlined"
-                required
-              />
-            )}
-          />
+          <AirportAutocomplete setFormData={setFormData} label="Origin" dataKey="origin"/>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <Autocomplete
-            options={airports}
-            getOptionLabel={(option) => `${option.city} (${option.iata_code})`}
-            onChange={(event, newValue) => {
-              setFormData({
-                ...formData,
-                destination: newValue,
-              });
-            }}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Destination"
-                variant="outlined"
-                required
-              />
-            )}
-          />
+        <AirportAutocomplete setFormData={setFormData} label="Destination" dataKey="destination"/>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <TextField
@@ -115,8 +91,8 @@ const SearchForm = ({ onSearch }) => {
         </Grid>
       </Grid>
 
-      <button type="submit">Search Flights</button>
     </form>
+    </div>
   );
 };
 

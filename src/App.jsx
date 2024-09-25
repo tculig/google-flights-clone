@@ -1,10 +1,12 @@
 // src/App.js
 import React, { useState } from 'react';
-import SearchForm from './components/SearchForm';
 import FlightResults from './components/FlightResults';
 import { searchFlights } from './api';
 import Filters from './components/Filters';
 import './App.css';
+import { ReactComponent as HeroImage } from './assets/flights_nc_4.svg'; // Adjust the path to your SVG
+import * as Styled from './App.styles';
+import SearchForm from 'components/SearchForm';
 
 function App() {
   const [flights, setFlights] = useState([]);
@@ -25,7 +27,7 @@ function App() {
     }
   };
 
-  const [filters, setFilters] = useState({});
+  const [filters, setFilters] = useState({maxPrice:0});
 
   const handleFilterChange = (newFilters) => {
     setFilters(newFilters);
@@ -45,14 +47,20 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Flight Search</h1>
-      <SearchForm onSearch={handleSearch} />
+      <HeroImage style={{width:"1248px"}}/>
+      <Styled.Title>Flights</Styled.Title>
+      <Styled.Content>
+        <Styled.SearchContainer>
+        <SearchForm onSearch={handleSearch} />
+        </Styled.SearchContainer>
+     
       {loading && <div>Loading flights...</div>}
       {error && <div className="error">{error}</div>}
       {flights.length > 0 && (
         <Filters onFilterChange={handleFilterChange} filters={filters} />
       )}
       <FlightResults flights={filteredFlights} />
+      </Styled.Content>
     </div>
   );
 }
