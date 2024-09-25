@@ -1,24 +1,6 @@
-// @ts-nocheck
 import * as Styled from "./styles";
 import React from "react";
-
-const getTimeOnly = (timedate) => {
-  const fullTime = timedate.split("T")[1];
-  return fullTime.substring(0, 5);
-}
-
-const getDuration = (starttime,endtime) => {
-  const diff = (new Date(endtime)) - (new Date(starttime));
-  return msToTime(diff);
-}
-
-function msToTime(duration) {
-  const hours = Math.floor(duration / (1000 * 60 * 60));
-  const minutes = Math.floor((duration % (1000 * 60 * 60)) / (1000 * 60));
-  
-  return `${hours} hrs ${minutes} min`;
-}
-
+import { getTimeOnly, msToTime } from "../../utils";
 
 const FlightCard = ({ flight }) => {
   const firstLeg = flight.legs[0];

@@ -20,9 +20,6 @@ function App() {
     setError(null);
     try {
       const data = await searchFlights(searchParams);
-      console.log(data)
-      console.log(data.data)
-      console.log(data.data.itineraries)
       setFlights(data?.data?.itineraries ?? []);
     } catch (err) {
       setError("Error fetching flights. Please try again.");
@@ -38,41 +35,47 @@ function App() {
     setFilters(newFilters);
   };
 
-  const applyFilters = useCallback((flights) => {
-    let filteredFlights = [...flights];
-    if (filters.maxPrice) {
-      filteredFlights = filteredFlights.filter(
-        (flight) => flight.price.raw <= filters.maxPrice
-      );
-    }
-    return filteredFlights;
-  },[filters.maxPrice]);
+  const applyFilters = useCallback(
+    (flights) => {
+      let filteredFlights = [...flights];
+      if (filters.maxPrice) {
+        filteredFlights = filteredFlights.filter(
+          (flight) => flight.price.raw <= filters.maxPrice
+        );
+      }
+      return filteredFlights;
+    },
+    [filters.maxPrice]
+  );
 
   const filteredFlights = applyFilters(flights);
 
   return (
     <div className="App">
-      <HeroImage style={{ maxWidth: "1248px" }} />
-      <Styled.Title>Flights</Styled.Title>
-      <Styled.Content>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            padding: "0 1rem",
-          }}
-        >
-          <SearchForm onSearch={handleSearch} />
-          {loading && <div>Loading flights...</div>}
-          {error && <div className="error">{error}</div>}
-          {(!loading && totalSearches > 0)? (
-            <>
-            {/*<Filters onFilterChange={handleFilterChange} filters={filters} />*/}
-            <FlightResults flights={filteredFlights} />
-            </>
-          ) : null}
-        </div>
-      </Styled.Content>
+      <Styled.SlidingContainer>
+        <HeroImage style={{ maxWidth: "1248px" }} />   
+        <Styled.Content  style={{ marginTop: filteredFlights.length > 0 ? "-200px" : "-100px" }}>
+        <Styled.Title>Flights</Styled.Title>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              padding: "0 1rem",
+              width: "100%",
+            }}
+          >
+            <SearchForm onSearch={handleSearch} />
+            {loading && <div>Loading flights...</div>}
+            {error && <div className="error">{error}</div>}
+          </div>
+        </Styled.Content>
+      </Styled.SlidingContainer>
+      {!loading && totalSearches > 0 ? (
+        <>
+          {/*<Filters onFilterChange={handleFilterChange} filters={filters} />*/}
+          <FlightResults flights={filteredFlights} />
+        </>
+      ) : null}
     </div>
   );
 }

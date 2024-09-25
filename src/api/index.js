@@ -3,7 +3,6 @@ import axios from 'axios';
 const API_KEY = process.env.REACT_APP_RAPIDAPI_KEY;
 
 export const searchFlights = async (params) => {
-    console.log(params)
     const options = {
         method: 'GET',
         url: 'https://sky-scrapper.p.rapidapi.com/api/v2/flights/searchFlights',

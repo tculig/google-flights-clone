@@ -3,6 +3,9 @@
   flex-direction: column;
   gap: 15px;
   margin-top: 20px;
+  max-width: 1024px;
+  width: 100%;
+  padding-bottom: 2rem;
 }
 
 .flight-card {
@@ -10,7 +13,6 @@
   padding: 15px;
   border-radius: 8px;
   display: flex;
-  
 }
 
 .search-form {
@@ -22,16 +24,14 @@
 .App {
   max-width: 1248px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
 }
 
 .error {
   color: red;
-}
-
-@media (max-width: 600px) {
-  .search-form {
-    flex-direction: column;
-  }
 }
 
 .search-form {

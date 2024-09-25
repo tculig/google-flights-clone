@@ -10,11 +10,21 @@ const Title = styled.div`
 const Content = styled.div`
     display: flex;
     flex-direction: column;
-    margin: 0 auto;
     max-width: 1024px;
-    textAlign: center;
+    width: 100%;
+    align-items:center;
+    flex: 1;
+    transition: all 0.5s;
 `
 
+const SlidingContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items:center;
+    position: sticky;
+    top: 0;
+    align-self: flex-start
+`
 
-
-export { Title, Content };
+export { Title, Content, SlidingContainer };
