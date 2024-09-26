@@ -16,7 +16,7 @@ const SearchForm = ({ onSearch }) => {
     returnDate: "",
     passengers: 1,
     tripType: optionsButton1[1].key,
-    class: optionsButton3[0].key,
+    cabinClass: optionsButton3[0].key,
   });
 
   const today = new Date().toISOString().split("T")[0];
@@ -58,7 +58,7 @@ const SearchForm = ({ onSearch }) => {
             options={optionsButton3}
             setFormData={setFormData}
             formData={formData}
-            dataKey="class"
+            dataKey="cabinClass"
           />
         </Styled.TopContainer>
         <form
@@ -90,6 +90,21 @@ const SearchForm = ({ onSearch }) => {
               min: today,
             }}
           />
+          {formData.tripType === "roundTrip" && (
+            <TextField
+              type="date"
+              name="returnDate"
+              label="Return Date"
+              value={formData.returnDate}
+              onChange={handleChange}
+              InputLabelProps={{ shrink: true }}
+              variant="outlined"
+              required
+              inputProps={{
+                min: today,
+              }}
+            />
+          )}
         </form>
       </Styled.SearchContainer>
       <Button
@@ -111,7 +126,13 @@ const SearchForm = ({ onSearch }) => {
       >
         Search
       </Button>
-      <div style={{position:"relative", marginTop:"-40px", marginBottom:"24px"}}>
+      <div
+        style={{
+          position: "relative",
+          marginTop: "-40px",
+          marginBottom: "24px",
+        }}
+      >
         <div className="overlay-container"></div>
       </div>
     </>
