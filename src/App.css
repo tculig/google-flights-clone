@@ -13,6 +13,7 @@
   padding: 15px;
   border-radius: 8px;
   display: flex;
+  overflow: hidden;
 }
 
 .search-form {
@@ -27,7 +28,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .overlay-container::before {
@@ -39,6 +41,7 @@
   height: 60px; /* This defines the height of the overlay */
   background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(0, 0, 0, 0)); /* Gradient effect */
   pointer-events: none; 
+  z-index: 68;
 }
 
 .error {

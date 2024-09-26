@@ -65,7 +65,7 @@ function App() {
             }}
           >
             <SearchForm onSearch={handleSearch} />
-            {loading && <div>Loading flights...</div>}
+            {loading && <div style={{zIndex:"70"}}>Loading flights...</div>}
             {error && <div className="error">{error}</div>}
           </div>
         </Styled.Content>

@@ -15,6 +15,7 @@ const Content = styled.div`
     align-items:center;
     flex: 1;
     transition: all 0.5s;
+    padding:1rem
 `
 
 const SlidingContainer = styled.div`
@@ -24,7 +25,6 @@ const SlidingContainer = styled.div`
     align-items:center;
     position: sticky;
     top: 0;
-    align-self: flex-start
 `
 
 export { Title, Content, SlidingContainer };

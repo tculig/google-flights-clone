@@ -5,6 +5,7 @@ const SectionBox = styled.div`
     display:flex;
     flex-direction:column;
     padding: 16px;
+    background: white;
 `
 
 const SectionBoxFlex = styled(SectionBox)`

@@ -3,7 +3,7 @@ import FlightCard from './FlightCard';
 
 const FlightResults = ({ flights }) => {
   if (!flights.length) {
-    return <div>No flights found.</div>;
+    return <div style={{zIndex:"70"}}>No flights found.</div>;
   }
 
   return (
