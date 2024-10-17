@@ -1,5 +1,5 @@
 // src/App.js
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import FlightResults from "./components/FlightResults";
 import { searchFlights } from "./api";
 import Filters from "./components/Filters";
@@ -7,9 +7,11 @@ import "./App.css";
 import { ReactComponent as HeroImage } from "./assets/flights_nc_4.svg"; // Adjust the path to your SVG
 import * as Styled from "./App.styles";
 import SearchForm from "sections/SearchForm";
+import Captcha from "components/Captcha";
 
 function App() {
   const [flights, setFlights] = useState([]);
+  const [captcha, setCaptcha] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [totalSearches, setTotalSearches] = useState(0);
@@ -21,6 +23,7 @@ function App() {
     try {
       const data = await searchFlights(searchParams);
       setFlights(data?.data?.itineraries ?? []);
+      setCaptcha(data?.message?.action==="captcha" ? data: null);
     } catch (err) {
       setError("Error fetching flights. Please try again.");
       console.error(err);
@@ -48,14 +51,18 @@ function App() {
     [filters.maxPrice]
   );
 
+  useEffect(() => {
+    if(captcha) Captcha(captcha);
+  }, [captcha])
+
   const filteredFlights = applyFilters(flights);
 
   return (
     <div className="App">
       <Styled.SlidingContainer>
-        <HeroImage style={{ maxWidth: "1248px" }} />   
-        <Styled.Content  style={{ marginTop: filteredFlights.length > 0 ? "-200px" : "-100px" }}>
-        <Styled.Title>Flights</Styled.Title>
+        <HeroImage style={{ maxWidth: "1248px" }} />
+        <Styled.Content style={{ marginTop: filteredFlights.length > 0 ? "-200px" : "-100px" }}>
+          <Styled.Title>Flights</Styled.Title>
           <div
             style={{
               display: "flex",
@@ -65,7 +72,7 @@ function App() {
             }}
           >
             <SearchForm onSearch={handleSearch} />
-            {loading && <div style={{zIndex:"70"}}>Loading flights...</div>}
+            {loading && <div style={{ zIndex: "70" }}>Loading flights...</div>}
             {error && <div className="error">{error}</div>}
           </div>
         </Styled.Content>
